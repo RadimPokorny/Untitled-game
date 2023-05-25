@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.game{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 2s;
+}
+
+.sky{
+    position: relative;
+    width: 100%;
+    height: 60%;
+    background-color:rgb(17, 183, 212);
+    display: flex;
+    align-items:end;
+    justify-content: center;
+}
+
+.grass{
+    position: relative;
+    width: 100%;
+    height: 40%;
+    background-color: darkgreen;
+    border-top: 5px solid white;;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.goal-center{
+    position: relative;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.goal{
+    position: relative;
+    width: 800px;
+    height: 300px;
+    border-left: 10px solid rgb(206, 206, 206);
+    border-right: 10px solid rgb(206, 206, 206);
+    border-top: 10px solid rgb(206, 206, 206);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ball{
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50px;
+    position: absolute;
+    top: 700px;
+    right: 48%;
+}
+
+.net{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td{
+    position: relative;
+    border: 2px solid white;
+}
