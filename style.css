@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -12,11 +14,16 @@
     transition: transform 2s;
 }
 
+body{
+    display: flex;
+    justify-content: center;
+}
+
 .sky{
     position: relative;
     width: 100%;
     height: 60%;
-    background-color:rgb(17, 183, 212);
+    background-image: linear-gradient(rgb(126, 191, 252), rgb(0, 153, 255));
     display: flex;
     align-items:end;
     justify-content: center;
@@ -26,7 +33,7 @@
     position: relative;
     width: 100%;
     height: 40%;
-    background-color: darkgreen;
+    background-image: linear-gradient(rgb(20, 153, 31), rgb(0, 92, 23));
     border-top: 5px solid white;;
     display: flex;
     align-items: center;
@@ -59,9 +66,9 @@
     height: 80px;
     background-color: white;
     border-radius: 50px;
-    position: absolute;
-    top: 700px;
-    right: 48%;
+    position: relative;
+    z-index: 5;
+    margin-top: 700px;
 }
 
 .net{
@@ -74,4 +81,27 @@
 td{
     position: relative;
     border: 2px solid white;
+}
+
+.score-board{
+    position: absolute;
+    width: 300px;
+    height: 80px;
+    background-image: linear-gradient(#5f1710, #a72b20);
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.score-board h1{
+    font-size: 48px;
+    background: -webkit-linear-gradient(#313131, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'RocknRoll One', sans-serif;
+    margin: 10px;
 }
