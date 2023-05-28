@@ -1,3 +1,9 @@
+//proměnné pro góly
+var playerDirection = "";
+var keeperDirection = "";
+
+
+
 // Získání odkazu na div s ID "goal"
 var goalDiv = document.querySelector('#goal-id');
 
@@ -22,6 +28,21 @@ for (let i = 0; i < 15; i++) {
 // Přidání tabulky do divu
 goalDiv.appendChild(table);
 
+var div = document.createElement('div');
+
+var keeperDiv = document.querySelector('#goalkeeper-center-id');
+
+// Vytvoření brankaře <table>
+var image = document.createElement('img');
+image.src = 'standing.png';
+image.style.width = '350px';
+image.style.height = '360px';
+image.style.marginBottom = "40px";
+
+div.appendChild(image);
+
+keeperDiv.appendChild(image);
+
 
 var ball = document.getElementById("ball");
 var canMove = true;
@@ -31,7 +52,7 @@ function moveBallUp() {
     canMove = false; // Zakážeme pohyb na 5 sekund
     ball.style.transition = "transform 0.5s, width 0.5s, height 0.5s"; // Přidáme přechodové efekty s délkou 0.5 sekundy pro transformaci, šířku a výšku
     ball.style.transform = "translateY(-500%) scale(0.5)"; // Posun na ose y a zmenšení velikosti míče
-    scoreGoal()
+    playerDirection = "top";
 }
 
 
@@ -40,7 +61,7 @@ function moveBallRight() {
     canMove = false; // Zakážeme pohyb na 5 sekund
     ball.style.transition = "transform 0.5s, width 0.5s, height 0.5s"; // Přidáme přechodové efekty s délkou 0.5 sekundy pro transformaci, šířku a výšku
     ball.style.transform = "translate(450%, -520%) scale(0.5)"; // Posun na ose y a zmenšení velikosti míče
-    scoreGoal()
+    playerDirection = "right";
 }
 
 function moveBallLeft() {
@@ -48,7 +69,7 @@ function moveBallLeft() {
     canMove = false; // Zakážeme pohyb na 5 sekund
     ball.style.transition = "transform 0.5s, width 0.5s, height 0.5s"; // Přidáme přechodové efekty s délkou 0.5 sekundy pro transformaci, šířku a výšku
     ball.style.transform = "translate(-350%, -520%) scale(0.5)"; // Posun na ose y a zmenšení velikosti míče
-    scoreGoal()
+    playerDirection = "left";
 }
 
 function moveBallDown() {
@@ -56,7 +77,7 @@ function moveBallDown() {
     canMove = false; // Zakážeme pohyb na 5 sekund
     ball.style.transition = "transform 0.5s, width 0.5s, height 0.5s"; // Přidáme přechodové efekty s délkou 0.5 sekundy pro transformaci, šířku a výšku
     ball.style.transform = "translateY(-300%) scale(0.5)"; // Posun na ose y a zmenšení velikosti míče
-    scoreGoal()
+    playerDirection = "bottom";
 }
 
 function ballOpacity(){
@@ -87,6 +108,11 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event.key === "ArrowDown") {
             moveBallDown();
         }
+
+        diveSomewhere();
+        checkGoal();
+
+
         // Vynulujeme transformaci a velikost míče po uplynutí 0.5 sekundy
         setTimeout(function() {
             ball.style.transition = ""; // Zrušíme přechodové efekty
@@ -94,10 +120,63 @@ document.addEventListener("DOMContentLoaded", function() {
             ball.style.width = ""; // Vynulujeme šířku
             ball.style.height = ""; // Vynulujeme výšku
             ball.style.opacity = ""; // Vynulujeme opacity
+            image.style.marginRight = ''; // Vynulujeme margin
+            image.style.marginLeft = ''; // Vynulujeme margin
+            image.style.marginTop = ''; // Vynulujeme margin
+            image.style.marginBottom = ''; // Vynulujeme margin
             canMove = true;
+            image.src = 'standing.png';
+            right = false;
+            left = false;
+            bottom = false;
+            up = false;
+            var rightP = false;
+            leftP = false;
+            bottomP = false;
+            upP = false;
         }, 4000);
 
 
     });
 });
+
+function diveLeft(){
+    image.src = 'diving-left.png';
+    image.style.marginRight = '400px';
+    keeperDirection = "left";
+}
+
+function diveRight(){
+    image.src = 'diving-right.png';
+    image.style.marginLeft = '400px';
+    keeperDirection = "right";
+}
+
+function diveTop(){
+    image.src = 'standing.png';
+    image.style.marginBottom = '100px';
+    keeperDirection = "top";
+}
+
+function diveBottom(){
+    image.src = 'standing.png';
+    keeperDirection = "bottom";
+}
+
+function diveSomewhere() {
+    // Pole obsahující názvy funkcí
+    var functionArray = [diveLeft, diveRight, diveTop, diveBottom];
+  
+    // Generování náhodného indexu pole
+    var randomIndex = Math.floor(Math.random() * functionArray.length);
+  
+    // Volání náhodně vybrané funkce
+    functionArray[randomIndex]();
+}
+
+function checkGoal(){
+    if(keeperDirection != playerDirection){
+        scoreGoal();
+    }
+}
 
